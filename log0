@@ -1,0 +1,57 @@
+Suponhamos que estamos criando um banco de dados para uma biblioteca. Nesse caso, teríamos entidades como Livro, Autor, Editora e Empréstimo. Vamos identificar os atributos de cada entidade e, em seguida, os relacionamentos entre elas.
+
+Entidades e Atributos:
+Livro:
+
+ID do livro (chave primária)
+Título
+ISBN
+Ano de publicação
+Gênero
+...
+Autor:
+
+ID do autor (chave primária)
+Nome
+Nacionalidade
+Data de nascimento
+...
+Editora:
+
+ID da editora (chave primária)
+Nome
+Localização
+...
+Empréstimo:
+
+ID do empréstimo (chave primária)
+ID do livro (chave estrangeira referenciando Livro)
+Data de empréstimo
+Data de devolução prevista
+...
+Relacionamentos:
+Um livro pode ser escrito por um ou mais autores. Portanto, há um relacionamento N para N entre Livro e Autor.
+Um livro é publicado por apenas uma editora, enquanto uma editora pode publicar vários livros. Assim, há um relacionamento 1 para N entre Livro e Editora.
+Um empréstimo está associado a um único livro, mas um livro pode estar associado a vários empréstimos. Portanto, há um relacionamento 1 para N entre Empréstimo e Livro.
+Modelo Lógico (Diagrama Entidade-Relacionamento - DER):
+lua
+Copy code
+  +-------------+       +------------+        +-------------+
+  |   Livro     |       |   Autor    |        |  Editora    |
+  +-------------+       +------------+        +-------------+
+  | LivroID (PK)|       | AutorID (PK)|        | EditoraID(PK)|
+  | Título      |       | Nome       |        | Nome        |
+  | ISBN        |       | Nacionalid.|        | Localização |
+  | AnoPubl.    |       | Dt.Nasc.   |        +-------------+
+  | Gênero      |       +------------+
+  +------+------+
+         |
+         | 1        +--------------+
+         +-------->|  Empréstimo  |
+                   +--------------+
+                   | EmpréstimoID |
+                   | LivroID (FK) |
+                   | Dt.Emprést.  |
+                   | Dt.Dev.Prev. |
+                   +--------------+
+Neste modelo lógico, cada entidade possui seus atributos e está conectada por chaves primárias e estrangeiras, representando os relacionamentos entre elas.
