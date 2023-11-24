@@ -1,0 +1,45 @@
+Aqui está um exemplo simplificado de como criar tabelas para um e-commerce:
+
+sql
+Copy code
+-- Criação da tabela "Clientes"
+CREATE TABLE Clientes (
+    ClienteID INT PRIMARY KEY,
+    Nome NVARCHAR(100),
+    Email NVARCHAR(100),
+    Endereco NVARCHAR(255)
+);
+
+-- Criação da tabela "Produtos"
+CREATE TABLE Produtos (
+    ProdutoID INT PRIMARY KEY,
+    Nome NVARCHAR(100),
+    Categoria NVARCHAR(50),
+    Preco DECIMAL(10, 2)
+);
+
+-- Criação da tabela "Pedidos"
+CREATE TABLE Pedidos (
+    PedidoID INT PRIMARY KEY,
+    ClienteID INT,
+    DataPedido DATE,
+    Status NVARCHAR(50),
+    FOREIGN KEY (ClienteID) REFERENCES Clientes(ClienteID)
+);
+
+-- Criação da tabela "ItensPedido"
+CREATE TABLE ItensPedido (
+    ItemID INT PRIMARY KEY,
+    PedidoID INT,
+    ProdutoID INT,
+    Quantidade INT,
+    FOREIGN KEY (PedidoID) REFERENCES Pedidos(PedidoID),
+    FOREIGN KEY (ProdutoID) REFERENCES Produtos(ProdutoID)
+);
+Neste exemplo:
+
+A tabela Clientes armazena informações sobre os clientes.
+A tabela Produtos armazena informações sobre os produtos disponíveis.
+A tabela Pedidos registra os pedidos feitos pelos clientes.
+A tabela ItensPedido contém os itens individuais em cada pedido, referenciando os produtos.
+Essa é uma estrutura básica para um banco de dados de e-commerce. Dependendo das necessidades específicas do seu sistema, você pode precisar adicionar mais tabelas, ajustar os tipos de dados, criar índices e aplicar outras otimizações.
