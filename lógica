@@ -1,0 +1,27 @@
+Suponha que você tenha um sistema de gerenciamento de biblioteca com as seguintes entidades: Livro, Autor e Editora. Vou mostrar um exemplo simples de como criar as tabelas correspondentes a essas entidades usando SQL:
+
+sql
+Copy code
+-- Tabela Livro
+CREATE TABLE Livro (
+    id_livro INT PRIMARY KEY,
+    titulo VARCHAR(100),
+    isbn VARCHAR(20),
+    id_autor INT,  -- Chave estrangeira referenciando a tabela Autor
+    id_editora INT  -- Chave estrangeira referenciando a tabela Editora
+);
+
+-- Tabela Autor
+CREATE TABLE Autor (
+    id_autor INT PRIMARY KEY,
+    nome VARCHAR(100),
+    sobrenome VARCHAR(100)
+);
+
+-- Tabela Editora
+CREATE TABLE Editora (
+    id_editora INT PRIMARY KEY,
+    nome VARCHAR(100),
+    endereco VARCHAR(200)
+);
+Neste exemplo, Livro possui chaves estrangeiras id_autor e id_editora que se relacionam com as tabelas Autor e Editora, respectivamente.
