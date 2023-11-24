@@ -1,0 +1,77 @@
+Gerenciamento de Usuários e Concessão de Permissões:
+Criar um novo usuário:
+
+Para criar um novo usuário no MySQL, você pode utilizar o comando CREATE USER:
+
+sql
+Copy code
+CREATE USER 'novousuario'@'localhost' IDENTIFIED BY 'senha';
+Conceder permissões ao usuário:
+
+Para conceder permissões específicas a um usuário para um banco de dados ou tabelas, utilize o comando GRANT:
+
+sql
+Copy code
+GRANT tipo_de_permissao ON nome_do_banco_de_dados.nome_da_tabela TO 'usuario'@'localhost';
+Por exemplo, para conceder permissão de leitura e escrita em uma tabela:
+
+sql
+Copy code
+GRANT SELECT, INSERT, UPDATE, DELETE ON nome_do_banco_de_dados.nome_da_tabela TO 'usuario'@'localhost';
+Revogar permissões:
+
+Para revogar permissões de um usuário, utilize o comando REVOKE:
+
+sql
+Copy code
+REVOKE tipo_de_permissao ON nome_do_banco_de_dados.nome_da_tabela FROM 'usuario'@'localhost';
+Automatização de Tarefas:
+Eventos (Event Scheduler):
+
+O MySQL possui um recurso chamado Event Scheduler que permite agendar e automatizar tarefas dentro do banco de dados. Por exemplo, você pode programar a execução de determinadas consultas ou procedimentos em horários específicos.
+
+Habilitar o Event Scheduler:
+sql
+Copy code
+SET GLOBAL event_scheduler = ON;
+Criar um evento:
+sql
+Copy code
+CREATE EVENT nome_do_evento
+ON SCHEDULE [schedule]
+DO
+-- instruções a serem executadas;
+Exemplo:
+
+sql
+Copy code
+CREATE EVENT meu_evento
+ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 HOUR
+DO
+INSERT INTO logs (mensagem, data_hora) VALUES ('Tarefa agendada executada', NOW());
+Esse exemplo cria um evento chamado meu_evento que insere uma mensagem na tabela de logs uma hora após o evento ser criado.
+
+Triggers:
+
+Os triggers são acionadores automáticos que são executados quando certos eventos ocorrem em uma tabela, como inserção, atualização ou exclusão de registros. Eles podem ser usados para automatizar ações associadas a esses eventos.
+
+Criar um trigger:
+sql
+Copy code
+CREATE TRIGGER nome_do_trigger
+AFTER INSERT ON nome_da_tabela
+FOR EACH ROW
+BEGIN
+    -- instruções a serem executadas;
+END;
+Exemplo:
+
+sql
+Copy code
+CREATE TRIGGER meu_trigger
+AFTER INSERT ON tabela_exemplo
+FOR EACH ROW
+BEGIN
+    INSERT INTO tabela_log (mensagem, data_hora) VALUES ('Novo registro inserido', NOW());
+END;
+Este exemplo cria um trigger que insere uma mensagem na tabela de log sempre que um novo registro for inserido na tabela tabela_exemplo.
