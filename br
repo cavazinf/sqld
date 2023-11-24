@@ -1,0 +1,44 @@
+Transações no MySQL:
+As transações no MySQL são usadas para garantir a integridade dos dados, permitindo que um conjunto de operações seja tratado como uma unidade indivisível. Isso significa que todas as operações devem ser concluídas com sucesso para que as alterações sejam aplicadas permanentemente ou desfeitas completamente em caso de falha.
+
+Exemplo de transação:
+Suponha que você deseja realizar uma série de operações (por exemplo, inserções, atualizações ou exclusões) como uma transação:
+
+sql
+Copy code
+START TRANSACTION; -- Inicia a transação
+
+-- Executa as operações desejadas
+INSERT INTO tabela_exemplo (coluna1, coluna2) VALUES (valor1, valor2);
+UPDATE outra_tabela SET coluna = novo_valor WHERE condição;
+DELETE FROM tabela_terceira WHERE condição;
+
+COMMIT; -- Confirma a transação
+START TRANSACTION: Inicia a transação.
+COMMIT: Confirma as alterações realizadas dentro da transação, tornando-as permanentes.
+ROLLBACK: Cancela a transação, revertendo todas as alterações feitas desde o início da transação.
+Backup e Recovery de Banco de Dados no MySQL:
+Backup do Banco de Dados:
+Backup Completo via Linha de Comando:
+
+bash
+Copy code
+mysqldump -u usuario -p senha --all-databases > backup.sql
+Isso cria um arquivo chamado backup.sql contendo o backup de todos os bancos de dados.
+
+Backup de um Banco de Dados Específico:
+
+bash
+Copy code
+mysqldump -u usuario -p senha nome_do_banco > backup_banco.sql
+Isso cria um arquivo chamado backup_banco.sql contendo o backup de um banco de dados específico.
+
+Recovery do Banco de Dados:
+Para recuperar um banco de dados a partir de um arquivo de backup, você pode usar o comando mysql no terminal:
+
+bash
+Copy code
+mysql -u usuario -p senha nome_do_banco < arquivo_backup.sql
+Isso restaurará o banco de dados a partir do arquivo de backup fornecido (arquivo_backup.sql), inserindo os dados de volta no banco de dados especificado (nome_do_banco).
+
+Lembre-se sempre de substituir usuario, senha, nome_do_banco e os nomes dos arquivos de backup conforme necessário.
